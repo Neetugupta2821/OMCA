@@ -30,7 +30,7 @@ export default function AddStaff() {
       .required('Email is required'),
     password: Yup.string()
       // .matches(passwordRules, { message: "Please create a stronger password" })
-      .required("Passwprd is Required"),
+      .required("Password is Required"),
     phone_no: Yup.string()
       .matches(/^[0-9]{10,11}$/, 'Phone number must be 10-11 digits')
       .required('Phone number is required'),

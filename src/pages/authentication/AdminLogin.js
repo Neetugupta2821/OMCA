@@ -71,7 +71,7 @@ console.log(localStorage.getItem("permissionArray"))
                   <div className="row">
                     <div className="col-md-6">
                       <div className="account-logo">
-                        <a href="index.html">
+                        <a >
                           <img src={logoDark} alt="" />
                         </a>
                       </div>

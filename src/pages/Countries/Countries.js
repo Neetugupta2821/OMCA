@@ -15,6 +15,9 @@ import { baseurl } from '../../Basurl/Baseurl';
 import { useNavigate } from "react-router-dom";
 import { GetAllCountries } from '../../reducer/Countries'
 import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import ClearIcon from "@mui/icons-material/Clear";
 export default function Countries() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
@@ -61,9 +64,9 @@ export default function Countries() {
       setRows(searchApiData);
     } else {
       const filterResult = searchApiData.filter((item) => {
-        const enquiryId = item.serviceId?.toLowerCase() || "";
+        const enquiryId = item.countryName?.toLowerCase() || "";
         // const emailMatches = item.job_Desciption.toLowerCase();
-        const country = item.serviceName?.toLowerCase() || "";
+        const country = item.countryCapital?.toLowerCase() || "";
         const searchValue = event.target.value.toLowerCase();
 
         // Check if the full name, last name, or email includes the search value
@@ -80,6 +83,7 @@ export default function Countries() {
     setFilterValue("");
     setRows(searchApiData);
   };
+  
   return (
     <>
       <div className="page-wrapper">
@@ -94,22 +98,22 @@ export default function Countries() {
               <div className="col-sm-4 col-md-9 col-lg-3">
                 <TextField
                   sx={{ width: "100%" }}
-                  label="Search By ServiceId"
+                  label="search by countries"
                   id="outlined-size-small"
                   size="small"
-                  // value={filterValue}
-                  // onChange={(e) => handleFilter(e)}
-                  // InputProps={{
-                  //   endAdornment: (
-                  //     <InputAdornment position="end">
-                  //       {filterValue && (
-                  //         <IconButton onClick={handleClearFilter} edge="end">
-                  //           <ClearIcon />
-                  //         </IconButton>
-                  //       )}
-                  //     </InputAdornment>
-                  //   ),
-                  // }}
+                  value={filterValue}
+                  onChange={(e) => handleFilter(e)}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        {filterValue && (
+                          <IconButton onClick={handleClearFilter} edge="end">
+                            <ClearIcon />
+                          </IconButton>
+                        )}
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
               <div className="col-sm-8 col-md-9 text-right m-b-20">

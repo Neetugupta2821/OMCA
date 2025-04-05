@@ -143,7 +143,7 @@ export default function EditStaff() {
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label>Role</label>
-                        <Field className="form-control" type="text" name="role" />
+                        <Field className="form-control" type="text" name="role" disabled />
                         <ErrorMessage name="role" component="div" style={{ color: "red" }} />
                       </div>
                     </div>

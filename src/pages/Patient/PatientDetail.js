@@ -30,9 +30,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
 import { AddNewTretmentPayment } from '../../reducer/PatientTreatmentSlice'
+import {TritmentStatus} from '../../reducer/PatientTreatmentSlice'
 
 function PatientDetail() {
   const navigate = useNavigate();
+    const [seekerStatus, setSeekerStatus] = React.useState({});
   const location = useLocation();
   const dispatch = useDispatch();
   // const { patient, loading, error } = useSelector((state) => state.patient);
@@ -270,25 +272,25 @@ function PatientDetail() {
 
   const handleExtraService = async () => {
     const allServices = [...chkservice, ...selectedServices]; // Combine previous and new services
-  
+
     try {
       const result = await dispatch(
         ExtraServices({ id: location.state.patientId, services: allServices })
       ).unwrap();
-  
+
       Swal.fire("New Services Added!", "", "success");
-  
+
       // Refresh the patient treatments (including services)
       dispatch(GetPatientTreatments({ id: location.state.patientId }));
     } catch (err) {
       Swal.fire("Error!", err?.message || "An error occurred", "error");
     }
-  
+
     console.log("Selected Services:", selectedServices);
     console.log("Previous Services (chkservice):", chkservice);
     console.log("All Services Sent to API:", allServices);
   };
-  
+
 
   const handleNotesdata = (e) => {
     e.preventDefault();  // Prevents the default form submission behavior
@@ -330,6 +332,30 @@ function PatientDetail() {
       Swal.fire("Error!", err?.message || "An error occurred", "error");
     }
   };
+   const handleChange = async (event, id) => {
+      const { value } = event.target;
+  
+      // Update local state first
+      setSeekerStatus((prev) => ({
+        ...prev,
+        [id]: value,
+      }));
+  
+      try {
+        const result = await dispatch(
+          TritmentStatus({ id, status: Number(value) })
+        ).unwrap();
+  
+        Swal.fire("Success!", "Status updated successfully!", "success");
+  
+        // Wait for backend update before fetching new data
+        setTimeout(async () => {
+          await dispatch(GetPatientTreatments({ id: location.state.patientId })).unwrap();
+        }, 500);
+      } catch (err) {
+        Swal.fire("Error!", err?.message || "An error occurred", "error");
+      }
+    };
   return (
     <>
       <div className="page-wrapper">
@@ -428,31 +454,25 @@ function PatientDetail() {
                               className="fa fa-plus"></i> Add Appointment</button>
                           </div>
                           <h3 className="card-title">Treatment ID-{info.treatment_id} <span className='mx-5'>
-                            <FormControl sx={{ minWidth: 180 }} size="small">
-                              <InputLabel id={`demo-select-small-label-${index}`}>
-                                {info.Enquiry_status === "Confirmed"
-                                  ? "Confirmed"
-                                  : info.Enquiry_status === "Hold"
-                                    ? "Hold"
-                                    : info.Enquiry_status === "Follow-Up"
-                                      ? "Follow-up"
-                                      : info.Enquiry_status === "Dead"
-                                        ? "Dead"
-                                        : "Treatment status"}
-
-                              </InputLabel>
-
+                            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                               <Select
-                                labelId={`demo-select-small-label-${index}`}
-                                id={`demo-select-small-${index}`}
-                              // value={seekerStatus[info.enquiryId] || ""} // Use state to set the current value
-                              // // label="Seeker Status"
-                              // onChange={(e) => handleChange(e, info.enquiryId)} // Handle change here
+                                value={
+                                  seekerStatus[info.enquiryId]
+                                    ? seekerStatus[info.enquiryId]
+                                    : info.Enquiry_status === "Schedule" ? "1"
+                                      : info.Enquiry_status === "Follow-Up" ? "2"
+                                        : info.Enquiry_status === "Complete" ? "3"
+                                           
+                                            : ""
+                                }
+                                onChange={(e) => handleChange(e, info.enquiryId)}
+                                displayEmpty
+                                inputProps={{ 'aria-label': 'Without label' }}
                               >
                                 <MenuItem value="1">Schedule</MenuItem>
                                 <MenuItem value="2">Follow-Up</MenuItem>
                                 <MenuItem value="3">Complete</MenuItem>
-
+                              
                               </Select>
                             </FormControl>
                           </span></h3>
@@ -563,12 +583,13 @@ function PatientDetail() {
               <div className="tab-pane" id="bottom-tab3">
                 <div className="row">
                   <div className="col-md-12">
-
+                    <button className="btn btn btn-primary btn-rounded float-right" onClick={(e) => handleClickOpen5(e)}><i
+                      className="fa fa-plus"></i> Add Notes</button>
                     {notes?.length === 0 ? "No notes for Patient" : <>
                       {notes?.map((info, index) => (
                         <div className="card-box">
                           <div className=" ">
-                            {index === 0 && <button className="btn btn btn-primary btn-rounded float-right" onClick={(e) => handleClickOpen5(e, info.enquiryId)}><i
+                            {index === 0 && <button className="btn btn btn-primary btn-rounded float-right" onClick={(e) => handleClickOpen5(e)}><i
                               className="fa fa-plus"></i> Add Notes</button>}
                           </div>
                           <h3 className="card-title">Note-{index + 1}</h3>

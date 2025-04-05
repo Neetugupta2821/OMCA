@@ -144,6 +144,37 @@ export const AddNewTretmentPayment = createAsyncThunk(
         }
     }
 );
+export const TritmentStatus = createAsyncThunk(
+    "PatientTreatments/TritmentStatus",
+    async (object, { rejectWithValue }) => {
+      try {
+        const token = localStorage.getItem("token");
+  
+        if (!token) {
+          throw new Error("Authorization token is missing");
+        }
+  
+        const response = await axios.post(
+          `${baseurl}update_patient_treatment_status/${object.id}`,
+          { status: object.status }, // Ensure you're passing the correct payload
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+  
+        return response.data; // Success response
+      } catch (err) {
+        console.error("Error editing Enquiry status:", err.response?.data?.message);
+        return rejectWithValue(
+          err.response?.data || { message: "An unknown error occurred" }
+        );
+      }
+    }
+  );
+  
 
 const PatientTreatmentSlice = createSlice({
     name: 'PatientTreatments',
@@ -187,7 +218,26 @@ const PatientTreatmentSlice = createSlice({
 
           
 
+  //Status Enquiry update
+      .addCase(TritmentStatus.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(TritmentStatus.fulfilled, (state, action) => {
+        state.loading = false;
+        const updatedUser = action.payload;
 
+        // Update the staff list with the edited user
+        state.Enquiry = state.PatientTreatments.map((user) =>
+          user.patientId
+        === updatedUser.patientId
+        ? updatedUser : user
+        );
+      })
+      .addCase(TritmentStatus.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
     }
 })
 export default PatientTreatmentSlice.reducer

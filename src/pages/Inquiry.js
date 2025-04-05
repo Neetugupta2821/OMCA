@@ -384,27 +384,19 @@ export default function Inquiry() {
                                 <TableCell>
                                   <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                                     <Select
-                                      value={seekerStatus[info.enquiryId] || info.Enquiry_status || ""} // Use existing status as initial value
+                                      value={
+                                        seekerStatus[info.enquiryId]
+                                          ? seekerStatus[info.enquiryId]
+                                          : info.Enquiry_status === "Confirmed" ? "1"
+                                            : info.Enquiry_status === "Hold" ? "2"
+                                              : info.Enquiry_status === "Follow-Up" ? "3"
+                                                : info.Enquiry_status === "Dead" ? "4"
+                                                  : ""
+                                      }
                                       onChange={(e) => handleChange(e, info.enquiryId)}
                                       displayEmpty
                                       inputProps={{ 'aria-label': 'Without label' }}
                                     >
-                                      {/* Display the existing status as the initially selected option */}
-                                      {info.Enquiry_status && (
-                                        <MenuItem value={info.Enquiry_status}>
-                                          {info.Enquiry_status === "Confirmed"
-                                            ? "Confirmed"
-                                            : info.Enquiry_status === "Hold"
-                                              ? "Hold"
-                                              : info.Enquiry_status === "Follow-Up"
-                                                ? "Follow-up"
-                                                : info.Enquiry_status === "Dead"
-                                                  ? "closed"
-                                                  : info.Enquiry_status}
-                                        </MenuItem>
-                                      )}
-
-                                      {/* Standard options for changing the status */}
                                       <MenuItem value="1">Confirmed</MenuItem>
                                       <MenuItem value="2">Hold</MenuItem>
                                       <MenuItem value="3">Follow-up</MenuItem>

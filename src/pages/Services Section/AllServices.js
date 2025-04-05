@@ -106,9 +106,10 @@ export default function AllServices() {
                         ? { ...service, isActive: !currentState } // Toggle state in UI
                         : service
                 )
-            );
+            ); 
     
-            Swal.fire("Status!", !currentState ? "Activated." : "Deactivated.", "success");
+            // Swal.fire("Status!", !currentState ? "Activated." : "Deactivated.", "success");
+            Swal.fire("Status!",  "Status updated successfully", "success");
         } catch (err) {
             console.error("Error:", err);
             const errorMessage = err?.message || JSON.stringify(err);
@@ -181,7 +182,7 @@ export default function AllServices() {
                             <div className="col-sm-4 col-md-9 col-lg-3">
                                 <TextField
                                     sx={{ width: "100%" }}
-                                    label="Search By Service Id"
+                                    label="Search By Service Id and Name"
                                     id="outlined-size-small"
                                     size="small"
                                     value={filterValue}
