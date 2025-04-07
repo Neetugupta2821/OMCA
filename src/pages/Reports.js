@@ -230,7 +230,11 @@ export default function Reports() {
           </div>
           <div className="main_content">
             <div className="row d-flex">
+<<<<<<< HEAD
               <div className="col-sm-3 date_pick  col-md-3">
+=======
+              <div className="col-sm-3 date_pick">
+>>>>>>> 844da55774cce00f599fe234b5003a19ab128f03
                 <DatePicker
                   value={dateRange}
                   format="MM/DD/YYYY"
@@ -240,6 +244,7 @@ export default function Reports() {
                   numberOfMonths={2}
                 />
               </div>
+<<<<<<< HEAD
               <div className='col-sm-3 col-md-3'>
                 <TextField id="outlined-basic" label="country" variant="outlined" size="small" onChange={submitInputdata} name="country" value={report.country}/>
               </div>
@@ -250,6 +255,13 @@ export default function Reports() {
                 <button className="btn btn btn-primary" href="job-grid" onClick={getReportData}>
                   Report
                 </button>
+=======
+              <div className='col-sm-3'>
+                <TextField id="outlined-basic" label="country" variant="outlined" size="small" onChange={submitInputdata} name="country" value={report.country}    sx={{ width: 300 }}/>
+              </div>
+              <div className='col-sm-3'>
+                <TextField id="outlined-basic" label="treatment name" variant="outlined" size="small" onChange={submitInputdata} name="treatment"   value={report.treatment}    sx={{ width: 300 }}/>
+>>>>>>> 844da55774cce00f599fe234b5003a19ab128f03
               </div>
               {/* <div className='col-sm-2'>
                 <TextField id="outlined-basic" label="gender" variant="outlined" size="small" onChange={submitInputdata} name="gender" value={report.gender}/>
@@ -270,7 +282,15 @@ export default function Reports() {
               {/* <div className='col-sm-2'>
                 <TextField id="outlined-basic" label="age" variant="outlined" size="small" onChange={submitInputdata} name="age" value={report.age} />
               </div> */}
+<<<<<<< HEAD
                
+=======
+              <div className="col-sm-3 text-end">
+                <button className="btn btn btn-primary" href="job-grid" onClick={getReportData}>
+                  Report
+                </button>
+              </div>
+>>>>>>> 844da55774cce00f599fe234b5003a19ab128f03
               {/* <div className="col-sm-8 col-9 text-right m-b-20">
                 <Link to="/Admin/add-patient" className="btn btn btn-primary btn-rounded float-right"><i
                   className="fa fa-plus"></i> New Patient</Link>

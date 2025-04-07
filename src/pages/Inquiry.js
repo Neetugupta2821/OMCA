@@ -37,6 +37,12 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import axios from 'axios'
 import { baseurl } from '../Basurl/Baseurl'
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 844da55774cce00f599fe234b5003a19ab128f03
 export default function Inquiry() {
   const navigate = useNavigate();
   const [note, setNote] = useState("")
@@ -431,8 +437,13 @@ export default function Inquiry() {
                                   </FormControl> */}
                                 </TableCell>
 
+<<<<<<< HEAD
                                 <TableCell style={{ "white-space": "nowrap", cursor :"pointer" }}><i className="fa fa-pencil m-r-5" onClick={(e) => EditButton(e, info.enquiryId)}></i><i className="fa fa-trash-o m-r-5"></i><span><VisibilityIcon style={{ "fontSize": "18px" }} onClick={(e) => ViewDetail(e, info.enquiryId)} /></span> </TableCell>
                                 <TableCell><NotesIcon style={{cursor:"pointer"}} onClick={(e) => handleClickOpen2(e, info.enquiryId)} /></TableCell>
+=======
+                                <TableCell style={{ "white-space": "nowrap" }}><i className="fa fa-pencil m-r-5" onClick={(e) => EditButton(e, info.enquiryId)}></i><i className="fa fa-trash-o m-r-5"></i><span><VisibilityIcon style={{ "fontSize": "18px" }} onClick={(e) => ViewDetail(e, info.enquiryId)} /></span> </TableCell>
+                                <TableCell><NotesIcon onClick={(e) => handleClickOpen2(e, info.enquiryId)} /></TableCell>
+>>>>>>> 844da55774cce00f599fe234b5003a19ab128f03
                                 {/* <TableCell> </TableCell> */}
 
 
@@ -510,6 +521,11 @@ export default function Inquiry() {
 
                   <DialogActions>
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 844da55774cce00f599fe234b5003a19ab128f03
                     <Button type="submit" variant="contained" onClick={(e) => handleImportFile(e)}>
                       Submit
                     </Button>
