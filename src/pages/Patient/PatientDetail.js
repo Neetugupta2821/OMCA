@@ -30,11 +30,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
 import { AddNewTretmentPayment } from '../../reducer/PatientTreatmentSlice'
-import {TritmentStatus} from '../../reducer/PatientTreatmentSlice'
+import { TritmentStatus } from '../../reducer/PatientTreatmentSlice'
 
 function PatientDetail() {
   const navigate = useNavigate();
-    const [seekerStatus, setSeekerStatus] = React.useState({});
+  const [seekerStatus, setSeekerStatus] = React.useState({});
   const location = useLocation();
   const dispatch = useDispatch();
   // const { patient, loading, error } = useSelector((state) => state.patient);
@@ -332,30 +332,46 @@ function PatientDetail() {
       Swal.fire("Error!", err?.message || "An error occurred", "error");
     }
   };
-   const handleChange = async (event, id) => {
-      const { value } = event.target;
-  
-      // Update local state first
-      setSeekerStatus((prev) => ({
-        ...prev,
-        [id]: value,
-      }));
-  
-      try {
-        const result = await dispatch(
-          TritmentStatus({ id, status: Number(value) })
-        ).unwrap();
-  
-        Swal.fire("Success!", "Status updated successfully!", "success");
-  
-        // Wait for backend update before fetching new data
-        setTimeout(async () => {
-          await dispatch(GetPatientTreatments({ id: location.state.patientId })).unwrap();
-        }, 500);
-      } catch (err) {
-        Swal.fire("Error!", err?.message || "An error occurred", "error");
+  const handleChange = async (event, id) => {
+    const { value } = event.target;
+    console.log(seekerStatus)
+    // Update local state first
+    setSeekerStatus((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      throw new Error("Authorization token is missing");
+    }
+   
+    const response = await axios.post(
+      `${baseurl}update_patient_treatment_status/${id}`,
+      { status: Number(event.target.value) }, // Ensure you're passing the correct payload
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
-    };
+    );
+    try {
+      
+      Swal.fire("Success!", "Status updated successfully!", "success");
+
+      // Wait for backend update before fetching new data
+      dispatch(GetPatientTreatments({ id: location.state.patientId }))
+
+      return response.data; // Success response
+    } catch (err) {
+
+      console.log(err)
+
+
+    }
+  };
   return (
     <>
       <div className="page-wrapper">
@@ -457,22 +473,22 @@ function PatientDetail() {
                             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                               <Select
                                 value={
-                                  seekerStatus[info.enquiryId]
-                                    ? seekerStatus[info.enquiryId]
-                                    : info.Enquiry_status === "Schedule" ? "1"
-                                      : info.Enquiry_status === "Follow-Up" ? "2"
-                                        : info.Enquiry_status === "Complete" ? "3"
-                                           
-                                            : ""
+                                  seekerStatus[info.treatment_status]
+                                    ? seekerStatus[info.treatment_status]
+                                    : info.treatment_status === "Schedule" ? "1"
+                                      : info.treatment_status === "Follow-Up" ? "2"
+                                        : info.treatment_status === "Complete" ? "3"
+
+                                          : ""
                                 }
-                                onChange={(e) => handleChange(e, info.enquiryId)}
+                                onChange={(e) => handleChange(e, info.treatment_id)}
                                 displayEmpty
                                 inputProps={{ 'aria-label': 'Without label' }}
                               >
                                 <MenuItem value="1">Schedule</MenuItem>
                                 <MenuItem value="2">Follow-Up</MenuItem>
                                 <MenuItem value="3">Complete</MenuItem>
-                              
+
                               </Select>
                             </FormControl>
                           </span></h3>

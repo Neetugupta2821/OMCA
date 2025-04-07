@@ -120,7 +120,7 @@ export default function EditStaff() {
                           className="form-control"
                           type="email"
                           name="email"
-                          disabled
+                         
                         />
                         <ErrorMessage name="email" component="div" style={{ color: "red" }} />
                       </div>
@@ -129,7 +129,7 @@ export default function EditStaff() {
                     {/* Phone Number */}
                     <div className="col-sm-6">
                       <div className="form-group">
-                        <label>Phone No</label>
+                        <label>Phone No<span className="text-danger">*</span></label>
                         <Field className="form-control" type="text" name="phone_no" />
                         <ErrorMessage
                           name="phone_no"
@@ -142,7 +142,7 @@ export default function EditStaff() {
                     {/* Role */}
                     <div className="col-sm-6">
                       <div className="form-group">
-                        <label>Role</label>
+                        <label>Role<span className="text-danger">*</span></label>
                         <Field className="form-control" type="text" name="role" disabled />
                         <ErrorMessage name="role" component="div" style={{ color: "red" }} />
                       </div>
@@ -151,7 +151,7 @@ export default function EditStaff() {
                     {/* Gender */}
                     <div className="col-sm-6">
                       <div className="form-group gender-select">
-                        <label className="gen-label">Gender:</label>
+                        <label className="gen-label">Gender<span className="text-danger">*</span>:</label>
                         <div className="form-check-inline">
                           <label className="form-check-label">
                             <Field
@@ -196,7 +196,7 @@ export default function EditStaff() {
                     {/* Avatar */}
                     <div className="col-sm-6">
                       <div className="form-group">
-                        <label>Profile Image</label>
+                        <label>Profile Image<span className="text-danger">*</span></label>
                         <div className="profile-upload">
                           <div className="upload-img">
                             {selectedImage ? (

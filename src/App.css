@@ -3807,7 +3807,7 @@ html.menu-opened body {
 
 .gen-label {
   display: block;
-  margin-bottom: 18px;
+  /* margin-bottom: 18px; */
 }
 
 .delete-modal .modal-body .btn {

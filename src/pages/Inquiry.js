@@ -206,8 +206,9 @@ export default function Inquiry() {
       dispatch(GetAllEnquiry())
       Swal.fire("Success!", `${result.message}`, "success");
     } catch (err) {
+      console.log(err)
       setOpen3(false)
-      Swal.fire("Error!", err?.message || "An error occurred", "error");
+      Swal.fire("Error!", err?.error || "An error occurred", "error");
     }
   };
 
@@ -300,8 +301,9 @@ export default function Inquiry() {
               </div>
               <div className="col-sm-8  col-md-3 col-lg-9 text-right m-b-20">
                 <Link to="/Admin/add-Enquiry" className="btn btn btn-primary btn-rounded float-right"><i className="fa fa-plus"></i> New Enquiry</Link>
-                <button onClick={handleSampleFile} className="btn btn btn-primary btn-rounded float-right mx-2"><i className="fa fa-file mx-2"></i>Sample file</button>
+                
                 <button className="btn btn btn-primary btn-rounded float-right" onClick={(e) => handleClickOpen3(e)}><i className="fa fa-file-excel-o mx-2"></i>Import Excel File</button>
+                <button onClick={handleSampleFile} className="btn btn btn-primary btn-rounded float-right mx-2"><i className="fa fa-file mx-2"></i>Sample file</button>
               </div>
 
             </div>

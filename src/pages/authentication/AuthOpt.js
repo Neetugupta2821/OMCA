@@ -42,7 +42,7 @@ export const AuthOpt = () => {
         // Numeric validation
         const numericRegex = /^[0-9]+$/;
         if (!numericRegex.test(otp)) {
-            toast.error("OTP must contain only numbers.");
+            toast.error("OTP should contain numbers only.");
             return;
         }
         axios
