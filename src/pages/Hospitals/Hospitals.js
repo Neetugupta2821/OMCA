@@ -106,7 +106,6 @@ export default function Hospitals() {
   };
 
   const handleFilter = (event) => {
-<<<<<<< HEAD
     const searchValue = event.target.value.toLowerCase();
   
     if (searchValue === "") {
@@ -129,32 +128,13 @@ export default function Hospitals() {
           country.includes(searchValue)||
           contact.includes(searchValue)||
           hospitalCode.includes(searchValue)
-=======
-    if (event.target.value === "") {
-      setRows(searchApiData);
-    } else {
-      const filterResult = searchApiData.filter((item) => {
-        const enquiryId = item.hospitalName?.toLowerCase() || "";
-        // const emailMatches = item.job_Desciption.toLowerCase();
-        const name = item.patient_name?.toLowerCase() || "";
-        const country = item.country?.toLowerCase() || "";
-        const searchValue = event.target.value.toLowerCase();
-
-        // Check if the full name, last name, or email includes the search value
-        return (
-          enquiryId.includes(searchValue)  
-         
->>>>>>> 844da55774cce00f599fe234b5003a19ab128f03
         );
       });
       setRows(filterResult);
     }
     setFilterValue(event.target.value);
   };
-<<<<<<< HEAD
   
-=======
->>>>>>> 844da55774cce00f599fe234b5003a19ab128f03
   const handleClearFilter = () => {
     setFilterValue("");
     setRows(searchApiData);
