@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/omca/static/css/main.9824210f.css",
-    "main.js": "/omca/static/js/main.a1f86427.js",
+    "main.css": "/omca/static/css/main.6912073a.css",
+    "main.js": "/omca/static/js/main.06d8c53f.js",
     "static/media/dashboard-doc.png": "/omca/static/media/dashboard-doc.f03f443e05acd5633e20.png",
     "static/media/login-bg2.jpg": "/omca/static/media/login-bg2.6c36e70540693ea38524.jpg",
     "static/media/login-logo-bg.jpg": "/omca/static/media/login-logo-bg.b8ddc2831df29c21e51b.jpg",
@@ -9,11 +9,11 @@
     "static/media/logo-web-large2.png": "/omca/static/media/logo-web-large2.80b1768bd011e519d7a8.png",
     "static/media/logo-dark.png": "/omca/static/media/logo-dark.5913cbaed6b16cd0fbc0.png",
     "index.html": "/omca/index.html",
-    "main.9824210f.css.map": "/omca/static/css/main.9824210f.css.map",
-    "main.a1f86427.js.map": "/omca/static/js/main.a1f86427.js.map"
+    "main.6912073a.css.map": "/omca/static/css/main.6912073a.css.map",
+    "main.06d8c53f.js.map": "/omca/static/js/main.06d8c53f.js.map"
   },
   "entrypoints": [
-    "static/css/main.9824210f.css",
-    "static/js/main.a1f86427.js"
+    "static/css/main.6912073a.css",
+    "static/js/main.06d8c53f.js"
   ]
 }
