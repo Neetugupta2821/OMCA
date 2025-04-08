@@ -54,7 +54,11 @@ export default function Earning() {
         <div className="content">
           <div className="row">
             <div className="col-md-12">
+<<<<<<< HEAD
               <h4 className="page-title">Earning</h4>
+=======
+              <h4 className="page-title">Earnings</h4>
+>>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
             </div>
           </div>
            <div className="row d-flex">

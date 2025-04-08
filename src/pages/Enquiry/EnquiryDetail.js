@@ -134,7 +134,11 @@ export default function EnquiryDetail() {
                                             </div>
                                             <div className="tab-pane" id="bottom-tab3">
                                                 <div className="row">
+<<<<<<< HEAD
                                                     <div className="col-md-12">
+=======
+                                                    <div className="col-md-12 ms-3">
+>>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
                                                         {row.discussionNotes?.length === 0 ? "No notes for paisent" : <>
                                                             {row.discussionNotes?.map((info, index) => (
                                                                 <div className="card-box">

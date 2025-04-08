@@ -65,9 +65,15 @@ export const Forgot = () => {
                     <div className="row">
                       <div className="col-md-6">
                         <div className="account-logo">
+<<<<<<< HEAD
                           <a href="index.html">
                             <img src={Image} alt="" />
                           </a>
+=======
+                          <div>
+                            <img src={Image} alt="" />
+                          </div>
+>>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
                         </div>
                       </div>
                       <div className="col-md-6">

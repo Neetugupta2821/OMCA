@@ -106,6 +106,7 @@ export default function Hospitals() {
   };
 
   const handleFilter = (event) => {
+<<<<<<< HEAD
     if (event.target.value === "") {
       setRows(searchApiData);
     } else {
@@ -120,12 +121,40 @@ export default function Hospitals() {
         return (
           enquiryId.includes(searchValue)  
          
+=======
+    const searchValue = event.target.value.toLowerCase();
+  
+    if (searchValue === "") {
+      setRows(searchApiData);
+    } else {
+      const filterResult = searchApiData.filter((item) => {
+        const enquiryId = item.enquiryId?.toLowerCase() || "";
+        const hospitalName = item.hospitalName?.toLowerCase() || "";
+        const patientName = item.patient_name?.toLowerCase() || "";
+        const location = item.location?.toLowerCase() || "";
+        const hospitalCode = item.hospitalCode?.toLowerCase() || "";
+        const country = item.country?.toLowerCase() || "";
+        const contact = item.contact?.toString() || "";
+  
+        return (
+          enquiryId.includes(searchValue) ||
+          hospitalName.includes(searchValue) ||
+          patientName.includes(searchValue) ||
+          location.includes(searchValue) ||
+          country.includes(searchValue)||
+          contact.includes(searchValue)||
+          hospitalCode.includes(searchValue)
+>>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
         );
       });
       setRows(filterResult);
     }
     setFilterValue(event.target.value);
   };
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
   const handleClearFilter = () => {
     setFilterValue("");
     setRows(searchApiData);

@@ -9,7 +9,7 @@ export default function Sidebar() {
   // Map stored permissions to actual sidebar routes
   const menuItems = [
     { path: "/Dashboard", icon: "fa-dashboard", label: "Dashboard" },
-    { path: "/Inquiries", actualPath: "/Admin/Inquiry", icon: "fa-comments-o", label: "Enquiries" },
+    { path: "/Enquiries", actualPath: "/Admin/Inquiry", icon: "fa-comments-o", label: "Enquiries" },
     { path: "/Manage_Patients", actualPath: "/Admin/patients", icon: "fa-wheelchair", label: "Manage Patients" },
     { path: "/Manage_Services", actualPath: "/Admin/Services", icon: "fa-server", label: "Manage Services" },
     { path: "/Manage_Appointments", actualPath: "/Admin/Appointments", icon: "fa-calendar", label: "Manage Appointments" },
@@ -21,7 +21,7 @@ export default function Sidebar() {
     { path: "/Manage_Countries", actualPath: "/Admin/Countries", icon: "fa-globe", label: "Manage Countries" },
     { path: "/Manage_Staffs", actualPath: "/Admin/Staff", icon: "fa-user-md", label: "Manage Staff" },
     // { path: "/Manage_Dashboard_Permission", actualPath: "/Admin/Permission", icon: "fa-lock", label: "Manage Permission" },
-    { path: "/New_Permission", actualPath: "/Admin/New-Permission", icon: "fa-lock", label: "Manage NewPermission" },
+    { path: "/New_Permission", actualPath: "/Admin/New-Permission", icon: "fa-lock", label: "Manage Permission" },
   ];
 
   return (

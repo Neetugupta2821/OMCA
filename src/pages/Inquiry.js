@@ -37,9 +37,18 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import axios from 'axios'
 import { baseurl } from '../Basurl/Baseurl'
 
+<<<<<<< HEAD
 
 
 
+=======
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 844da55774cce00f599fe234b5003a19ab128f03
+>>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
 export default function Inquiry() {
   const navigate = useNavigate();
   const [note, setNote] = useState("")
@@ -301,6 +310,10 @@ export default function Inquiry() {
               </div>
               <div className="col-sm-8  col-md-3 col-lg-9 text-right m-b-20">
                 <Link to="/Admin/add-Enquiry" className="btn btn btn-primary btn-rounded float-right"><i className="fa fa-plus"></i> New Enquiry</Link>
+<<<<<<< HEAD
+=======
+                
+>>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
                 <button className="btn btn btn-primary btn-rounded float-right" onClick={(e) => handleClickOpen3(e)}><i className="fa fa-file-excel-o mx-2"></i>Import Excel File</button>
                 <button onClick={handleSampleFile} className="btn btn btn-primary btn-rounded float-right mx-2"><i className="fa fa-file mx-2"></i>Sample file</button>
               </div>
@@ -433,8 +446,13 @@ export default function Inquiry() {
                                   </FormControl> */}
                                 </TableCell>
 
+<<<<<<< HEAD
                                 <TableCell style={{ "white-space": "nowrap" }}><i className="fa fa-pencil m-r-5" onClick={(e) => EditButton(e, info.enquiryId)}></i><i className="fa fa-trash-o m-r-5"></i><span><VisibilityIcon style={{ "fontSize": "18px" }} onClick={(e) => ViewDetail(e, info.enquiryId)} /></span> </TableCell>
                                 <TableCell><NotesIcon onClick={(e) => handleClickOpen2(e, info.enquiryId)} /></TableCell>
+=======
+                                <TableCell style={{ "white-space": "nowrap", cursor :"pointer" }}><i className="fa fa-pencil m-r-5" onClick={(e) => EditButton(e, info.enquiryId)}></i><i className="fa fa-trash-o m-r-5"></i><span><VisibilityIcon style={{ "fontSize": "18px" }} onClick={(e) => ViewDetail(e, info.enquiryId)} /></span> </TableCell>
+                                <TableCell><NotesIcon style={{cursor:"pointer"}} onClick={(e) => handleClickOpen2(e, info.enquiryId)} /></TableCell>
+>>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
                                 {/* <TableCell> </TableCell> */}
 
 
@@ -512,8 +530,16 @@ export default function Inquiry() {
 
                   <DialogActions>
 
+<<<<<<< HEAD
 
 
+=======
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 844da55774cce00f599fe234b5003a19ab128f03
+>>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
                     <Button type="submit" variant="contained" onClick={(e) => handleImportFile(e)}>
                       Submit
                     </Button>

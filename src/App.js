@@ -54,7 +54,11 @@ function App() {
 // setCount(count + 1); 
 
 // console.log(count);
+<<<<<<< HEAD
   console.log("date-08-04-2025,09:42")
+=======
+  console.log("date-05-04-2025,09:53")
+>>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
   return (
     <>
     <Provider store={store}> 
