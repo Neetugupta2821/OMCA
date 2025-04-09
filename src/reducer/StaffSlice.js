@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import { baseurl } from "../Basurl/Baseurl"
- 
+
 
 
 
@@ -52,7 +52,7 @@ export const EditStaffUser = createAsyncThunk(
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
-          
+
         },
       });
       return response.data; // Success response
@@ -72,7 +72,7 @@ export const ActiveStaffUser = createAsyncThunk(
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
-          
+
         },
       });
       return response.data; // Success response
@@ -84,6 +84,26 @@ export const ActiveStaffUser = createAsyncThunk(
     }
   }
 );
+
+export const DeleteStaff = createAsyncThunk('staff/DeleteStaff',
+  async (staffID, { rejectWithValue }) => {
+      try {
+          const response = await axios.delete(`${baseurl}delete_user_staff/${staffID.id}`,   {
+              headers: {
+                  "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                  "Content-Type": "application/json",
+                   
+              },
+          });
+          return staffID; // Success response
+      } catch (error) {
+          console.error("Error deleting hospital:", error);
+    return rejectWithValue(
+      error.response?.data || { message: "An unknown error occurred" }
+    );
+      }
+  }
+)
 
 const staffUserslice = createSlice({
   name: 'staff',
@@ -134,7 +154,7 @@ const staffUserslice = createSlice({
         state.error = action.payload;
       })
 
-//Active inActive staff
+      //Active inActive staff
       .addCase(ActiveStaffUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -151,7 +171,24 @@ const staffUserslice = createSlice({
       .addCase(ActiveStaffUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+      // Delet a Hospital data
+      .addCase(DeleteStaff.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(DeleteStaff.fulfilled, (state, action) => {
+        state.loading = false;
+        const deletedHospitalId = action.payload;
+        // Filter out the deleted hospital
+        state.hospital = state.staff.filter(
+          (user) => user._id !== deletedHospitalId
+        );
+      })
+      .addCase(DeleteStaff.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
   }
 })
 export default staffUserslice.reducer

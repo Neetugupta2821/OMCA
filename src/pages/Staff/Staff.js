@@ -17,7 +17,7 @@ import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { ActiveStaffUser } from '../../reducer/StaffSlice'
 import Swal from "sweetalert2";
 import TextField from "@mui/material/TextField";
-
+import {DeleteStaff} from '../../reducer/StaffSlice'
 export default function Staff() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
@@ -86,7 +86,52 @@ export default function Staff() {
     }
   };
 
+const handledelet = (e, staffID) => {
+    e.preventDefault();
+  
 
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        // text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          dispatch(DeleteStaff({ id: staffID }))
+            .unwrap() // If using Redux Toolkit, unwrap to handle success/failure easily
+            .then(() => {
+              return dispatch(GetAllStaffUser());
+            })
+            .then((newData) => {
+              Swal.fire("Deleted!", "Staff has been deleted.", "success");
+              setRows(newData.payload); // Update rows with the latest data
+            })
+            .catch((err) => {
+              Swal.fire("Error!", err?.message || "An error occurred", "error");
+               
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            // text: "Hospital data is safe :)",
+            icon: "error",
+          });
+        }
+      });
+  };
   return (
     <>
       <div className="page-wrapper">
@@ -189,8 +234,8 @@ export default function Staff() {
                                     />
                                   }
                                 </TableCell>
-                                <TableCell>  <a className="dropdown-item" onClick={(e) => EditButton(e, info._id)}><i className="fa fa-pencil m-r-5"></i>
-                                </a></TableCell>
+                                <TableCell> <i className="fa fa-pencil m-r-5" onClick={(e) => EditButton(e, info._id)}></i>
+                                 <i className="fa fa-trash-o m-r-5"  onClick={(e) => handledelet(e, info._id)}></i></TableCell>
                                 {/* <TableCell align="left" className="dropdown dropdown-action"> <a href="#" className="action-icon dropdown-toggle" data-toggle="dropdown"
                                   aria-expanded="false"><i className="fa fa-ellipsis-v"></i></a>
                                   <div className="dropdown-menu dropdown-menu-right">

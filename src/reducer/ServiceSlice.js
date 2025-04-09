@@ -38,6 +38,47 @@ export const AddMulServices = createAsyncThunk(
     }
 );
 
+export const Editservice = createAsyncThunk(
+    "hospital/Editservice",
+    async (formData, { rejectWithValue }) => {
+        try {
+            const response = await axios.put(`${baseurl}update_service/${formData.id}`, formData, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+
+                },
+            });
+            return response.data; // Success response
+        } catch (err) {
+            console.error("Error editing staff user:", err.response?.data?.message);
+            return rejectWithValue(
+                err.response?.data || { message: "An unknown error occurred" }
+            );
+        }
+    }
+);
+
+export const DeleteService = createAsyncThunk('hospital/DeleteService',
+    async (hospitalId, { rejectWithValue }) => {
+        try {
+            const response = await axios.delete(`${baseurl}delete_service/${hospitalId.id}`,   {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                     
+                },
+            });
+            return hospitalId; // Success response
+        } catch (error) {
+            console.error("Error deleting hospital:", error);
+      return rejectWithValue(
+        error.response?.data || { message: "An unknown error occurred" }
+      );
+        }
+    }
+)
+
 
 export const ActiveService = createAsyncThunk(
     "Services/ActiveService",
@@ -104,8 +145,42 @@ const GetServiceSlice = createSlice({
             .addCase(ActiveService.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-            });
+            })
+            // Edit a  servisec data
+            .addCase(Editservice.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(Editservice.fulfilled, (state, action) => {
+                state.loading = false;
+                const updatedUser = action.payload;
 
+                // Update the staff list with the edited user
+                state.hospital = state.hospital.map((user) =>
+                    user.id === updatedUser.id ? updatedUser : user
+                );
+            })
+            .addCase(Editservice.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            // Delet a service data
+            .addCase(DeleteService.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(DeleteService.fulfilled, (state, action) => {
+                state.loading = false;
+                const deletedHospitalId = action.payload;
+                // Filter out the deleted hospital
+                state.hospital = state.hospital.filter(
+                    (user) => user.hospitalId !== deletedHospitalId
+                );
+            })
+            .addCase(DeleteService.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
 
     }
 })

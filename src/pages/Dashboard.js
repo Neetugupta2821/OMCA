@@ -3,9 +3,17 @@ import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
 import dashboard from '../img/dashboard-doc.png'
 import { baseurl } from '../Basurl/Baseurl'
- 
+ import {image} from '../Basurl/Baseurl'
+ import { GetUserData } from '../reducer/userSlice'
+ import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios';
 export default function Dashboard() {
+  const dispatch = useDispatch()
+  const { getuser, loading, error } = useSelector((state) => state.getuser)
+  useEffect(() => {
+    dispatch(GetUserData())
+    console.log(error, getuser)
+  }, [dispatch])
 const [count,setCount] = useState("")
 
 
@@ -46,7 +54,7 @@ useEffect(() => {
                     <img src={dashboard}  alt="" />
                   </div>
                   <div className="col-md-8">
-                    <h3>Welcome {localStorage.getItem("name")}</h3>
+                    <h3>Welcome {getuser.name}</h3>
                     <p className="mb-0">Have a nice day at work</p>
                   </div>
                 </div>
@@ -108,7 +116,7 @@ useEffect(() => {
                 <span className="dash-widget-bg dash-widget-bg6"><i className="fa fa-exclamation-triangle"></i></span>
                 <div className="dash-widget-info text-right">
                   <h3>{count.totalHospital}</h3>
-                  <span className="widget-title">Total total Hospital</span>
+                  <span className="widget-title">Total Hospital</span>
                 </div>
               </div>
             </div>

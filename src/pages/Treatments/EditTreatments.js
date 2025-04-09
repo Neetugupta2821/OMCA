@@ -68,11 +68,7 @@ export default function EditTreatments() {
                         EditTreatmentssection({ id: editTreatment.course_id, ...values })
                       ).unwrap();
 
-<<<<<<< HEAD
-                      Swal.fire("Success!", "Staff details updated successfully.", "success");
-=======
                       Swal.fire("Success!", "Treatment details updated successfully.", "success");
->>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
                       navigate('/Admin/Treatments');
                     } catch (err) {
                       Swal.fire("Error!", err?.message || "An error occurred", "error");

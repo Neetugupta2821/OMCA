@@ -7,11 +7,19 @@ import { logout } from '../reducer/LoginSlice';
 import user from '../img/user.jpg'
 import { baseurl } from '../Basurl/Baseurl';
 import axios from 'axios';
-
+import { useSelector} from 'react-redux'
+import { GetUserData } from '../reducer/userSlice'
+import {image} from '../Basurl/Baseurl'
 export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+    const { getuser, loading, error } = useSelector((state) => state.getuser)
+      useEffect(() => {
+        dispatch(GetUserData())
+        console.log(error, getuser)
+      }, [dispatch])
+ 
 
 
   const handleLogout = () => {
@@ -49,7 +57,7 @@ export default function Navbar() {
         <li className="nav-item dropdown has-arrow">
           <a href="#" className="dropdown-toggle nav-link user-link" data-toggle="dropdown">
             <span className="user-img">
-              <img className="rounded-circle" src={user} width="24" alt="Admin" />
+              <img className="rounded-circle" src={`${image}${getuser.profileImage}`} width="24" alt="Admin" />
               <span className="status online"></span>
             </span>
             <span>{localStorage.getItem("Role")}</span>

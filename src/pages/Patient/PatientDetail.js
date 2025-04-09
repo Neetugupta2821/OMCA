@@ -138,10 +138,10 @@ function PatientDetail() {
     // setTreatmentId(tretmentId)
     // setIShospitalArray(listhospital)
   }
-  const handleClickOpen3 = (e) => {
+  const handleClickOpen3 = (e, tretmentId) => {
     // alert("hello")
     setOpen3(true)
-    // setTreatmentId(tretmentId)
+    setTreatmentId(tretmentId)
     // setIShospitalArray(listhospital)
   }
 
@@ -318,14 +318,17 @@ function PatientDetail() {
   const handleAddTritmentPayment = async (e) => {
 
     e.preventDefault();
-    alert("hello ")
-    const result = await dispatch(AddNewTretmentPayment({ id: location.state.patientId, paid_amount: data.paid_amount, paymentMethod: data.paymentMethod, payment_Date: data.payment_Date })).unwrap();
+
+    const result = await dispatch(AddNewTretmentPayment({ id: treatmentId, paid_amount: data.paid_amount, paymentMethod: data.paymentMethod, payment_Date: data.payment_Date })).unwrap();
     console.log(filesData)
     try {
 
       setOpen3(false)
       Swal.fire("Passport Details Added Successfully!", "", "success");
       dispatch(GetPatientTreatments({ id: location.state.patientId }));
+      setTreatmentId("")
+      setData("")
+
 
     }
     catch (err) {
@@ -346,7 +349,7 @@ function PatientDetail() {
     if (!token) {
       throw new Error("Authorization token is missing");
     }
-   
+
     const response = await axios.post(
       `${baseurl}update_patient_treatment_status/${id}`,
       { status: Number(event.target.value) }, // Ensure you're passing the correct payload
@@ -358,7 +361,7 @@ function PatientDetail() {
       }
     );
     try {
-      
+
       Swal.fire("Success!", "Status updated successfully!", "success");
 
       // Wait for backend update before fetching new data
@@ -454,8 +457,15 @@ function PatientDetail() {
 
                 <div className="row">
                   <div className="col-md-12">
-                    <button onClick={PatientDetailButton} className="btn btn btn-primary btn-rounded float-right mx-2"><i
-                      className="fa fa-plus"></i>Add Treatment</button>
+                    {tretment.length === 0 ? (
+                      <button style={{ display: 'block' }} onClick={PatientDetailButton} className="btn btn btn-primary btn-rounded float-right mx-2">
+                        <i className="fa fa-plus"></i>Add Treatment
+                      </button>
+                    ) : (
+                      <button  style={{ display: 'none' }}onClick={PatientDetailButton} className="btn btn btn-primary btn-rounded float-right mx-2">
+                        <i className="fa fa-plus"></i>Add Treatment
+                      </button>
+                    )}
                     {tretment?.length === 0 ? "No Treatment  Added for this patients" : <>
                       {tretment?.map((info, index) => (
                         <div className="card-box">
@@ -645,14 +655,15 @@ function PatientDetail() {
                       <div className="card-box">
                         <div className=" ">
 
-                          {index == 0 && (
-                            <button className="btn btn btn-primary btn-rounded float-right" onClick={(e) => handleClickOpen3(e)}><i
-                              className="fa fa-plus" ></i> Add Amount</button>
-                          )}
+
+                          <button className="btn btn btn-primary btn-rounded float-right" onClick={(e) => handleClickOpen3(e, info.treatment_id)}><i
+                            className="fa fa-plus" ></i> Add Amount</button>
+
 
 
                         </div>
                         <h3 className="card-title">Payment Date-{moment(info.payment_Date).format('L')}</h3>
+                        <p>Treatment ID-{info.treatment_id}</p>
                         <div className="experience-box">
 
                           <ul className="experience-list">

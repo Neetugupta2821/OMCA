@@ -106,22 +106,6 @@ export default function Hospitals() {
   };
 
   const handleFilter = (event) => {
-<<<<<<< HEAD
-    if (event.target.value === "") {
-      setRows(searchApiData);
-    } else {
-      const filterResult = searchApiData.filter((item) => {
-        const enquiryId = item.hospitalName?.toLowerCase() || "";
-        // const emailMatches = item.job_Desciption.toLowerCase();
-        const name = item.patient_name?.toLowerCase() || "";
-        const country = item.country?.toLowerCase() || "";
-        const searchValue = event.target.value.toLowerCase();
-
-        // Check if the full name, last name, or email includes the search value
-        return (
-          enquiryId.includes(searchValue)  
-         
-=======
     const searchValue = event.target.value.toLowerCase();
   
     if (searchValue === "") {
@@ -144,17 +128,13 @@ export default function Hospitals() {
           country.includes(searchValue)||
           contact.includes(searchValue)||
           hospitalCode.includes(searchValue)
->>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
         );
       });
       setRows(filterResult);
     }
     setFilterValue(event.target.value);
   };
-<<<<<<< HEAD
-=======
   
->>>>>>> 2f95a2f3b30ce17ceab65b577c54c52c1541bd86
   const handleClearFilter = () => {
     setFilterValue("");
     setRows(searchApiData);
@@ -245,7 +225,7 @@ export default function Hospitals() {
 
                               >
                                  <TableCell align="left">{page * rowsPerPage + i + 1}</TableCell> {/* Corrected line */}
-                                <TableCell><img width="28" height="28" src={`${image}${info.hospitalImage}`} className="rounded-circle m-r-5" alt="" />
+                                <TableCell><img width="28" height="28" src={`${image}${info.hospitalImage}`} className="rounded-circle m-r-5" alt="" /> {" "}
                                   {info.hospitalName}</TableCell>
                                 <TableCell>{info.location}</TableCell>
                                 <TableCell>{info.hospitalCode}</TableCell>
